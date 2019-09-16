@@ -1,4 +1,3 @@
 language: c
 dist: bionic
-script:
-	make
+script: make
