@@ -1,8 +1,8 @@
 # ApplicationSecurityAssignment1
 To build a spell checker
-------------------------
+-------------------------
 
-https://travis-ci.com/wonderfulroller7/ApplicationSecurityAssignment1.svg?token=hJq5j26qqMLZspbxj2hm&branch=master
+[![Build Status](https://travis-ci.com/wonderfulroller7/ApplicationSecurityAssignment1.svg?token=hJq5j26qqMLZspbxj2hm&branch=master)](https://travis-ci.com/wonderfulroller7/ApplicationSecurityAssignment1)
 
 - Part 1:
 	- Create GPG key to make sure that all our commits can be verified.
