@@ -19,7 +19,7 @@ bool check_word(const char* word, hashmap_t hashtable[]) {
 bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]) {
 
 	bool load = false;
-	printf("%s\n", dictionary_file);
+	fprintf(stdout, "%s\n", dictionary_file);
 	FILE *dictionary = fopen(dictionary_file, "r");
 	if ( dictionary == NULL ) {
 		perror( "Dictionary file error" );
@@ -32,7 +32,7 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]) {
 		char buffer[max_buffer_size];
 		fgets(buffer, max_buffer_size, dictionary);
 		buffer[strlen(buffer) - 1] = '\0';
-		if (strcmp(buffer, "yodeled") != 0) {
+		if (strlen(buffer) != 1) {
 			fprintf(stdout, "%s\n", buffer);
 		}
 		else {
@@ -40,8 +40,6 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]) {
 			fprintf(stdout, "Debug: read dictionary changed\n");
 			read_dictionary = false;
 		}
-
-		// Strip the \n from the word
 
 	} while(read_dictionary);
 
