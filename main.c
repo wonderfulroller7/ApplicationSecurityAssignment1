@@ -4,10 +4,19 @@
 
 int main(int argc, char **argv) {
 
-    hashmap_t* hash_table;
+    node* hash_table[HASH_SIZE];
     int result = EXIT_FAILURE;
-    if (load_dictionary(argv[1], hash_table)) {
-        result = EXIT_SUCCESS;
+    if (argc!=3)
+	{
+		fprintf(stdout,"Incorrect Usage!\n");
+		fprintf(stdout,"./spell_check <dictionary_file> <file_to_be_checked>\n");
+	} 
+    else {
+        fprintf(stdout, "%s %s\n", argv[1], argv[2]);
+        if (load_dictionary(argv[1], hash_table)) {
+            // print_hash_table(hash_table);
+            result = EXIT_SUCCESS;
+        }
     }
     return result;
 }
