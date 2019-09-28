@@ -1,6 +1,7 @@
 #include<stdlib.h>
+#include "dictionary.h"
 
-int main() {
-	printf("Spell ");
-	return 0;
+bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]){
+
+	return true;
 }
