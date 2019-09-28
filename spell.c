@@ -25,22 +25,23 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]) {
 		perror( "Dictionary file error" );
 		return load;
 	}
+	hashtable = NULL;
 	int max_buffer_size = LENGTH + 1;
-	
-	bool read_dictionary = true; 
+	bool read_dictionary = true;
+	int counter = 0;
 	do {
 		char buffer[max_buffer_size];
-		fgets(buffer, max_buffer_size, dictionary);
-		buffer[strlen(buffer) - 1] = '\0';
-		if (strlen(buffer) != 1) {
+		while( fgets(buffer, max_buffer_size, dictionary) != NULL ) {
+			buffer[strlen(buffer) - 1] = '\0';
 			fprintf(stdout, "%s\n", buffer);
+			hashmap_t temp_node = (node *)malloc(sizeof(node));
+			char temp_value[strlen(buffer)]; 
+			strncpy(temp_value, buffer, strlen(buffer));
+			hashtable[counter] = temp_node;
+			counter++;
 		}
-		else {
-			fprintf(stdout, "%s\n", buffer);
-			fprintf(stdout, "Debug: read dictionary changed\n");
-			read_dictionary = false;
-		}
-
+		fprintf(stdout, "Debug: read dictionary changed\n");
+		read_dictionary = false;
 	} while(read_dictionary);
 
 	fprintf(stdout, "Debug: maximum Buffer size: %d\n", max_buffer_size);
