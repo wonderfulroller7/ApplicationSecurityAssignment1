@@ -14,7 +14,7 @@ int main(int argc, char **argv) {
     else {
         fprintf(stdout, "%s %s\n", argv[1], argv[2]);
         if (load_dictionary(argv[1], hash_table)) {
-            // print_hash_table(hash_table);
+            printf("Dictionary loaded");
             result = EXIT_SUCCESS;
         }
     }
