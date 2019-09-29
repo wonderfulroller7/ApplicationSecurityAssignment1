@@ -13,13 +13,13 @@ int main(int argc, char **argv) {
 	} 
     else {
         // fprintf(stdout, "%s %s\n", argv[1], argv[2]);
-        if (load_dictionary(argv[1], hash_table)) {
+        if (load_dictionary(argv[2], hash_table)) {
             //printf("Dictionary loaded");
             result = EXIT_SUCCESS;
         }
 
         char *misspelled[1000];
-        FILE *fp = fopen(argv[2], "r");
+        FILE *fp = fopen(argv[1], "r");
 	    if ( fp == NULL ) {
 		    perror( "Dictionary file error" );
 	    }

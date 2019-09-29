@@ -4,6 +4,15 @@
 #include<ctype.h>
 #include "dictionary.h"
 
+void destroy_misspelled(char *misspelled[], int size) {
+	for (int loop = size -1; loop > 0; loop--) {
+		for (int i =0 ;i < strlen(misspelled[loop]); i++) {
+			free(misspelled[loop][i]);
+		}
+		free(misspelled[loop]);
+	}
+}
+
 void print_hash_table(hashmap_t hash_table[]) {
 
     for (int i=0; i<HASH_SIZE; i++) {
@@ -17,7 +26,7 @@ void print_hash_table(hashmap_t hash_table[]) {
 			} while(probe_head->next != NULL);
 			fprintf(stdout,"%s\n", probe_head->word);
 			fflush(stdout);
-			free(probe_head);
+			probe_head = NULL;
 		} else {
 			fprintf(stdout,"Bucket is empty\n");
 		}
@@ -36,6 +45,7 @@ void print_bucket(int bucket, hashmap_t hashtable[]) {
 	} else {
 		fprintf(stdout,"Bucket is empty");
 	}
+	temp = NULL;
 }
 
 bool isNumber(const char* word)
@@ -78,7 +88,7 @@ int check_words(FILE* fp, hashmap_t hashtable[], char * misspelled[]) {
 
 	char file_char;
 	int current_counter = 0;
-	char *word = malloc(46*sizeof(char));
+	char word[46];
 	int line_counter = 0;
 	// read_file(fp);
 	do {
@@ -93,23 +103,27 @@ int check_words(FILE* fp, hashmap_t hashtable[], char * misspelled[]) {
 				continue;
 			} else {
 				// fprintf(stdout, "(%s) will be checked\n", word);
-				if (check_word(word, hashtable)) {
-					current_counter = 0;
-					word = malloc(46*sizeof(char));
-				} else {
-					misspelled[misspelled_counter++] = word;
+				if (!check_word(word, hashtable)) {
+					misspelled[misspelled_counter] = malloc((strlen(word)+1)*sizeof(char));
+					snprintf(misspelled[misspelled_counter++],strlen(word)+1,"%s",word);
+					//misspelled[misspelled_counter++] = word;
 					fprintf(stdout, "%s is wrong on line %d\n", word, line_counter);
-					word = malloc(46*sizeof(char));
-					current_counter = 0;
+					// *word = malloc(46*sizeof(char));
+					// current_counter = 0;
 				}
+				current_counter= 0;
+				word[current_counter] = '\0';
 				//printf("\n");
 			}
 		} else {
 			word[current_counter++] = file_char;
+			word[current_counter] = '\0';
 		}
 	} while(file_char != EOF);
 	fprintf(stdout, "No of misspelled words: %d\n", misspelled_counter);
 
+	// destroy_misspelled(misspelled, misspelled_counter);
+	fclose(fp);
 	return misspelled_counter;
 }
 
@@ -153,13 +167,14 @@ bool check_word(const char* word, hashmap_t hashtable[]) {
 		if (strncmp(bucket_probe->word, temp_word, strlen(temp_word)) == 0) {
 				valid_word = true;
 		}
-		free(bucket_probe);
+		bucket_probe = NULL;
 	}
 
-	if (!valid_word) {
-		fprintf(stdout, "(%s) in bucket %d\n", temp_word, hashvalue);
-		print_bucket(hashvalue, hashtable);
-	}
+	// if (!valid_word) {
+	// 	fprintf(stdout, "(%s) in bucket %d\n", temp_word, hashvalue);
+	// 	print_bucket(hashvalue, hashtable);
+	// }
+
 	free(temp_word);
 
 	return valid_word;
@@ -185,52 +200,44 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]) {
 		char buffer[max_buffer_size];
 		while( fgets(buffer, max_buffer_size, dictionary) != NULL ) {
 			word_count++;
-			char *word = (char *)malloc(sizeof(strlen(buffer)));
+			char word[LENGTH + 1];
 			memcpy(word, buffer, strlen(buffer) + 1);
 			word[strlen(word) - 1] = '\0';
-			// fprintf(stdout, "%s\n", buffer);
 			for (int loop=0; loop<strlen(word); loop++) {
 				word[loop] = tolower(word[loop]);
 			}
 			int bucket_number = hash_function(word);
 			if (bucket_number > highest_bucket)
 				highest_bucket = bucket_number;
-			// fprintf(stdout, "%s %d\n", buffer, bucket_number);
 			int linked_list_pos = 0;
 			hashmap_t probe_head = hashtable[bucket_number];
 			if (probe_head != NULL) {
 				// Append Node to end of the list when bucket is not empty
 				while (probe_head->next != NULL) {
-					//fprintf(stdout, "%s ->", probe_head->word);
 					probe_head = probe_head->next;
 					linked_list_pos++;
 				}
 				hashmap_t new_node = (node *)malloc(sizeof(node));
 				new_node->next = NULL;
-				//memcpy(probe_head->word, word, strlen(buffer));
 				snprintf(new_node->word, sizeof(new_node->word), "%s", word);
 				probe_head->next = new_node;
 			} else {
 				// Insert word into an empty bucket
-				hashtable[bucket_number] = (node *)malloc(sizeof(node));
+				hashtable[bucket_number] = malloc(sizeof(node));
 				hashtable[bucket_number]->next = NULL;
 				snprintf(hashtable[bucket_number]->word, sizeof(hashtable[bucket_number]->word), "%s", word);
-				//memcpy(probe_head->word, buffer, strlen(buffer));
 			}
-			// fprintf(stdout, "%s %d %d\n", word, bucket_number, linked_list_pos);
-			free(word);
+			word[0] = '\0';
+			//free(word);
 		}
-		// fprintf(stdout, "Words counted %d\n", word_count);
-		// fprintf(stdout, "Highest bucket number %d\n", highest_bucket);
-		// fprintf(stdout, "Debug: read dictionary changed\n");
 		read_dictionary = false;
 	} while(read_dictionary);
 
 	fprintf(stdout, "Debug: maximum Buffer size: %d\n", max_buffer_size);
 
-	// if ( fclose(dictionary) != 0) {
-	// 	perror("Dictionary closing error");
-	// }
+	if ( fclose(dictionary) != 0) {
+		perror("Dictionary closing error");
+	}
 	load = true;
 	return load;
 }
