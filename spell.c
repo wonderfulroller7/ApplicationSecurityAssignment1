@@ -110,7 +110,9 @@ int check_words(FILE* fp, hashmap_t hashtable[], char *misspelled[]) {
 	fprintf(stdout, "No of misspelled words: %d\n", misspelled_counter);
 
 	// destroy_misspelled(misspelled, misspelled_counter);
-	fclose(fp);
+	if ( fclose(fp) != 0) {
+		perror("Text file closing error");
+	}
 	return misspelled_counter;
 }
 
