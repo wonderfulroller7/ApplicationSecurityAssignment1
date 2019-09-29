@@ -4,15 +4,6 @@
 #include<ctype.h>
 #include "dictionary.h"
 
-void destroy_misspelled(char *misspelled[], int size) {
-	for (int loop = size -1; loop > 0; loop--) {
-		for (int i =0 ;i < strlen(misspelled[loop]); i++) {
-			free(misspelled[loop][i]);
-		}
-		free(misspelled[loop]);
-	}
-}
-
 void print_hash_table(hashmap_t hash_table[]) {
 
     for (int i=0; i<HASH_SIZE; i++) {
@@ -77,7 +68,7 @@ void read_file(FILE *fp) {
     }
 }
 
-int check_words(FILE* fp, hashmap_t hashtable[], char * misspelled[]) {
+int check_words(FILE* fp, hashmap_t hashtable[], char *misspelled[]) {
 
 	int misspelled_counter = 0;
 
@@ -106,14 +97,10 @@ int check_words(FILE* fp, hashmap_t hashtable[], char * misspelled[]) {
 				if (!check_word(word, hashtable)) {
 					misspelled[misspelled_counter] = malloc((strlen(word)+1)*sizeof(char));
 					snprintf(misspelled[misspelled_counter++],strlen(word)+1,"%s",word);
-					//misspelled[misspelled_counter++] = word;
 					fprintf(stdout, "%s is wrong on line %d\n", word, line_counter);
-					// *word = malloc(46*sizeof(char));
-					// current_counter = 0;
 				}
 				current_counter= 0;
 				word[current_counter] = '\0';
-				//printf("\n");
 			}
 		} else {
 			word[current_counter++] = file_char;

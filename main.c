@@ -18,7 +18,7 @@ int main(int argc, char **argv) {
             result = EXIT_SUCCESS;
         }
 
-        char *misspelled[1000];
+        char *misspelled[45];
         FILE *fp = fopen(argv[1], "r");
 	    if ( fp == NULL ) {
 		    perror( "Dictionary file error" );

@@ -1,0 +1,140 @@
+==5906== Memcheck, a memory error detector
+==5906== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==5906== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==5906== Command: ./spell_check test1.txt wordlist.txt
+==5906== Parent PID: 2416
+==5906== 
+--5906-- 
+--5906-- Valgrind options:
+--5906--    --tool=memcheck
+--5906--    --leak-check=full
+--5906--    --log-file=valgrind/run3.log
+--5906--    -v
+--5906--    --track-origins=yes
+--5906-- Contents of /proc/version:
+--5906--   Linux version 5.0.0-29-generic (buildd@lgw01-amd64-039) (gcc version 7.4.0 (Ubuntu 7.4.0-1ubuntu1~18.04.1)) #31~18.04.1-Ubuntu SMP Thu Sep 12 18:29:21 UTC 2019
+--5906-- 
+--5906-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-avx-avx2
+--5906-- Page sizes: currently 4096, max supported 4096
+--5906-- Valgrind library directory: /usr/lib/valgrind
+--5906-- Reading syms from /home/neil/ApplicationSecurity/ApplicationSecurityAssignment1/spell_check
+--5906-- Reading syms from /lib/x86_64-linux-gnu/ld-2.27.so
+--5906--   Considering /lib/x86_64-linux-gnu/ld-2.27.so ..
+--5906--   .. CRC mismatch (computed 1b7c895e wanted 2943108a)
+--5906--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.27.so ..
+--5906--   .. CRC is valid
+--5906-- Reading syms from /usr/lib/valgrind/memcheck-amd64-linux
+--5906--   Considering /usr/lib/valgrind/memcheck-amd64-linux ..
+--5906--   .. CRC mismatch (computed c25f395c wanted 0a9602a8)
+--5906--    object doesn't have a symbol table
+--5906--    object doesn't have a dynamic symbol table
+--5906-- Scheduler: using generic scheduler lock implementation.
+--5906-- Reading suppressions file: /usr/lib/valgrind/default.supp
+==5906== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-5906-by-neil-on-???
+==5906== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-5906-by-neil-on-???
+==5906== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-5906-by-neil-on-???
+==5906== 
+==5906== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==5906== don't want to do, unless you know exactly what you're doing,
+==5906== or are doing some strange experiment):
+==5906==   /usr/lib/valgrind/../../bin/vgdb --pid=5906 ...command...
+==5906== 
+==5906== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==5906==   /path/to/gdb ./spell_check
+==5906== and then give GDB the following command
+==5906==   target remote | /usr/lib/valgrind/../../bin/vgdb --pid=5906
+==5906== --pid is optional if only one valgrind process is running
+==5906== 
+--5906-- REDIR: 0x401f2f0 (ld-linux-x86-64.so.2:strlen) redirected to 0x58060901 (???)
+--5906-- REDIR: 0x401f0d0 (ld-linux-x86-64.so.2:index) redirected to 0x5806091b (???)
+--5906-- Reading syms from /usr/lib/valgrind/vgpreload_core-amd64-linux.so
+--5906--   Considering /usr/lib/valgrind/vgpreload_core-amd64-linux.so ..
+--5906--   .. CRC mismatch (computed 4b63d83e wanted 670599e6)
+--5906--    object doesn't have a symbol table
+--5906-- Reading syms from /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so
+--5906--   Considering /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so ..
+--5906--   .. CRC mismatch (computed a4b37bee wanted 8ad4dc94)
+--5906--    object doesn't have a symbol table
+==5906== WARNING: new redirection conflicts with existing -- ignoring it
+--5906--     old: 0x0401f2f0 (strlen              ) R-> (0000.0) 0x58060901 ???
+--5906--     new: 0x0401f2f0 (strlen              ) R-> (2007.0) 0x04c32db0 strlen
+--5906-- REDIR: 0x401d360 (ld-linux-x86-64.so.2:strcmp) redirected to 0x4c33ee0 (strcmp)
+--5906-- REDIR: 0x401f830 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4c374f0 (mempcpy)
+--5906-- Reading syms from /lib/x86_64-linux-gnu/libc-2.27.so
+--5906--   Considering /lib/x86_64-linux-gnu/libc-2.27.so ..
+--5906--   .. CRC mismatch (computed b1c74187 wanted 042cc048)
+--5906--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.27.so ..
+--5906--   .. CRC is valid
+--5906-- REDIR: 0x4edac70 (libc.so.6:memmove) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5906-- REDIR: 0x4ed9d40 (libc.so.6:strncpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5906-- REDIR: 0x4edaf50 (libc.so.6:strcasecmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5906-- REDIR: 0x4ed9790 (libc.so.6:strcat) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5906-- REDIR: 0x4ed9d70 (libc.so.6:rindex) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5906-- REDIR: 0x4edc7c0 (libc.so.6:rawmemchr) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5906-- REDIR: 0x4edade0 (libc.so.6:mempcpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5906-- REDIR: 0x4edac10 (libc.so.6:bcmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5906-- REDIR: 0x4ed9d00 (libc.so.6:strncmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5906-- REDIR: 0x4ed9800 (libc.so.6:strcmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5906-- REDIR: 0x4edad40 (libc.so.6:memset) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5906-- REDIR: 0x4ef80f0 (libc.so.6:wcschr) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5906-- REDIR: 0x4ed9ca0 (libc.so.6:strnlen) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5906-- REDIR: 0x4ed9870 (libc.so.6:strcspn) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5906-- REDIR: 0x4edafa0 (libc.so.6:strncasecmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5906-- REDIR: 0x4ed9840 (libc.so.6:strcpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5906-- REDIR: 0x4edb0e0 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5906-- REDIR: 0x4ed9da0 (libc.so.6:strpbrk) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5906-- REDIR: 0x4ed97c0 (libc.so.6:index) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5906-- REDIR: 0x4ed9c70 (libc.so.6:strlen) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5906-- REDIR: 0x4ee46c0 (libc.so.6:memrchr) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5906-- REDIR: 0x4edaff0 (libc.so.6:strcasecmp_l) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5906-- REDIR: 0x4edabe0 (libc.so.6:memchr) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5906-- REDIR: 0x4ef8eb0 (libc.so.6:wcslen) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5906-- REDIR: 0x4eda050 (libc.so.6:strspn) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5906-- REDIR: 0x4edaf20 (libc.so.6:stpncpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5906-- REDIR: 0x4edaef0 (libc.so.6:stpcpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5906-- REDIR: 0x4edc7f0 (libc.so.6:strchrnul) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5906-- REDIR: 0x4edb040 (libc.so.6:strncasecmp_l) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5906-- REDIR: 0x4fca3c0 (libc.so.6:__strrchr_avx2) redirected to 0x4c32730 (rindex)
+--5906-- REDIR: 0x4ed3070 (libc.so.6:malloc) redirected to 0x4c2faa0 (malloc)
+--5906-- REDIR: 0x4eda590 (libc.so.6:__GI_strstr) redirected to 0x4c37760 (__strstr_sse2)
+--5906-- REDIR: 0x4fc6420 (libc.so.6:__memchr_avx2) redirected to 0x4c33f80 (memchr)
+--5906-- REDIR: 0x4fcaad0 (libc.so.6:__memcpy_avx_unaligned_erms) redirected to 0x4c366e0 (memmove)
+--5906-- REDIR: 0x4fca590 (libc.so.6:__strlen_avx2) redirected to 0x4c32cf0 (strlen)
+--5906-- REDIR: 0x4fca1d0 (libc.so.6:__strchrnul_avx2) redirected to 0x4c37020 (strchrnul)
+--5906-- REDIR: 0x4ed3950 (libc.so.6:free) redirected to 0x4c30cd0 (free)
+--5906-- REDIR: 0x4fcaab0 (libc.so.6:__mempcpy_avx_unaligned_erms) redirected to 0x4c37130 (mempcpy)
+--5906-- REDIR: 0x4fc1510 (libc.so.6:__strncmp_sse42) redirected to 0x4c33570 (__strncmp_sse42)
+==5906== 
+==5906== HEAP SUMMARY:
+==5906==     in use at exit: 6,896,456 bytes in 123,136 blocks
+==5906==   total heap usage: 246,292 allocs, 123,156 frees, 12,569,801 bytes allocated
+==5906== 
+==5906== Searching for pointers to 123,136 not-freed blocks
+==5906== Checked 82,984 bytes
+==5906== 
+==5906== 16 bytes in 3 blocks are definitely lost in loss record 1 of 6
+==5906==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5906==    by 0x108FB8: check_words (spell.c:98)
+==5906==    by 0x1096FB: main (main.c:26)
+==5906== 
+==5906== 448 bytes in 8 blocks are possibly lost in loss record 2 of 6
+==5906==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5906==    by 0x1094AC: load_dictionary (spell.c:212)
+==5906==    by 0x109693: main (main.c:16)
+==5906== 
+==5906== 6,894,888 (99,848 direct, 6,795,040 indirect) bytes in 1,783 blocks are definitely lost in loss record 6 of 6
+==5906==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5906==    by 0x109513: load_dictionary (spell.c:219)
+==5906==    by 0x109693: main (main.c:16)
+==5906== 
+==5906== LEAK SUMMARY:
+==5906==    definitely lost: 99,864 bytes in 1,786 blocks
+==5906==    indirectly lost: 6,795,040 bytes in 121,340 blocks
+==5906==      possibly lost: 448 bytes in 8 blocks
+==5906==    still reachable: 1,104 bytes in 2 blocks
+==5906==         suppressed: 0 bytes in 0 blocks
+==5906== Reachable blocks (those to which a pointer was found) are not shown.
+==5906== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==5906== 
+==5906== ERROR SUMMARY: 3 errors from 3 contexts (suppressed: 0 from 0)
+==5906== ERROR SUMMARY: 3 errors from 3 contexts (suppressed: 0 from 0)
