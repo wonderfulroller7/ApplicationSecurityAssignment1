@@ -69,18 +69,15 @@ void read_file(FILE *fp) {
 
 int check_words(FILE* fp, hashmap_t hashtable[], char * misspelled[]) {
 
-	int result = EXIT_FAILURE;
+	int misspelled_counter = 0;
 
 	if	(fp == NULL) {
         perror("Unable to open file!");
-		return result;
+		return misspelled_counter;
     }
-
-	print_bucket(414, hashtable);
 
 	char file_char;
 	int current_counter = 0;
-	int misspelled_counter = 0;
 	char *word = malloc(46*sizeof(char));
 	int line_counter = 0;
 	// read_file(fp);
@@ -111,8 +108,9 @@ int check_words(FILE* fp, hashmap_t hashtable[], char * misspelled[]) {
 			word[current_counter++] = file_char;
 		}
 	} while(file_char != EOF);
+	fprintf(stdout, "No of misspelled words: %d\n", misspelled_counter);
 
-	return result;
+	return misspelled_counter;
 }
 
 /** 
@@ -141,7 +139,6 @@ bool check_word(const char* word, hashmap_t hashtable[]) {
 	}
 
 	int hashvalue = hash_function(temp_word);
-	fprintf(stdout, "(%s) in bucket %d\n", temp_word, hashvalue);
 
 	if (hashtable[hashvalue] != NULL) {
 		hashmap_t bucket_probe = hashtable[hashvalue];
@@ -157,12 +154,13 @@ bool check_word(const char* word, hashmap_t hashtable[]) {
 				valid_word = true;
 		}
 		free(bucket_probe);
-		free(temp_word);
 	}
 
 	if (!valid_word) {
+		fprintf(stdout, "(%s) in bucket %d\n", temp_word, hashvalue);
 		print_bucket(hashvalue, hashtable);
 	}
+	free(temp_word);
 
 	return valid_word;
 }
@@ -195,9 +193,6 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]) {
 				word[loop] = tolower(word[loop]);
 			}
 			int bucket_number = hash_function(word);
-			// if (bucket_number == 5) {
-			// 	printf("%s\n", word);
-			// }
 			if (bucket_number > highest_bucket)
 				highest_bucket = bucket_number;
 			// fprintf(stdout, "%s %d\n", buffer, bucket_number);
@@ -213,13 +208,13 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]) {
 				hashmap_t new_node = (node *)malloc(sizeof(node));
 				new_node->next = NULL;
 				//memcpy(probe_head->word, word, strlen(buffer));
-				snprintf(new_node->word,sizeof(new_node->word),"%s", word);
+				snprintf(new_node->word, sizeof(new_node->word), "%s", word);
 				probe_head->next = new_node;
 			} else {
 				// Insert word into an empty bucket
 				hashtable[bucket_number] = (node *)malloc(sizeof(node));
 				hashtable[bucket_number]->next = NULL;
-				snprintf(hashtable[bucket_number]->word,sizeof(hashtable[bucket_number]->word),"%s", word);
+				snprintf(hashtable[bucket_number]->word, sizeof(hashtable[bucket_number]->word), "%s", word);
 				//memcpy(probe_head->word, buffer, strlen(buffer));
 			}
 			// fprintf(stdout, "%s %d %d\n", word, bucket_number, linked_list_pos);
@@ -230,12 +225,8 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]) {
 		// fprintf(stdout, "Debug: read dictionary changed\n");
 		read_dictionary = false;
 	} while(read_dictionary);
-	
-	// print_bucket(414, hashtable);
-	//print_hash_table(hashtable);
 
 	fprintf(stdout, "Debug: maximum Buffer size: %d\n", max_buffer_size);
-	fclose(dictionary);
 
 	// if ( fclose(dictionary) != 0) {
 	// 	perror("Dictionary closing error");
