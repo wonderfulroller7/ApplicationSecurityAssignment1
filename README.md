@@ -11,3 +11,13 @@ To build a spell checker
 	- Procedure to commit for Signature to be verified
 		- git commit -S -m '<message to be added>' #(note -S is what signs, -s will not sign)
 
+- Part 2:
+	- Program spell-check
+	- Analyze the output using Valgrind
+	- Program should run as **./spell_check <wordfile> <dictionary_file>**.
+	- Code edits mainly occur in spell.c
+
+- Part 3:
+	- Create testcases
+	- Fix memory leaks stated by Valgrind
+	- Run the AFL fuzzer
