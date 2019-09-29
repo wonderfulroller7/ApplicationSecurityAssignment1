@@ -36,12 +36,79 @@ void print_bucket(int bucket, hashmap_t hashtable[]) {
 	} else {
 		fprintf(stdout,"Bucket is empty");
 	}
-	
+}
+
+bool isNumber(const char* word)
+{	
+	bool result = true;
+	for (int loop=0; loop<strlen(word); loop++) {
+		if (!isdigit(word[loop])){
+			result = false;
+			break;
+		}
+	}
+	return result;
+}
+
+bool isASpecialCharacter(char c) {
+
+	int value = (int)c;
+	if ( (value>=65 && value <=90) || (value>=97 && value <=122))
+		return false;
+	else
+		return true;
+}
+
+void read_file(FILE *fp) {
+
+    char buffer[1024];
+    while( fgets(buffer, 1024, fp) != NULL ) {
+        fprintf(stdout, "%s\n", buffer);
+    }
 }
 
 int check_words(FILE* fp, hashmap_t hashtable[], char * misspelled[]) {
 
-	int result = EXIT_SUCCESS;
+	int result = EXIT_FAILURE;
+
+	if	(fp == NULL) {
+        perror("Unable to open file!");
+		return result;
+    }
+
+	char file_char;
+	int current_counter = 0;
+	int misspelled_counter = 0;
+	char *word = malloc(46*sizeof(char));
+	int line_counter = 0;
+	// read_file(fp);
+	do {
+		file_char = (char)fgetc(fp);
+		// printf("%c", file_char);
+		if (isASpecialCharacter(file_char)) {
+			// printf("SC");
+			// printf("\nSpecial character found. Current counter: %d \n", line_counter);
+			if (file_char == '\n')
+				line_counter++;
+			if (current_counter == 0) {
+				continue;
+			} else {
+				// fprintf(stdout, "(%s) will be checked\n", word);
+				if (check_word(word, hashtable)) {
+					current_counter = 0;
+					word = malloc(46*sizeof(char));
+				} else {
+					misspelled[misspelled_counter++] = word;
+					fprintf(stdout, "%s is wrong on line %d\n", word, line_counter);
+					word = malloc(46*sizeof(char));
+					current_counter = 0;
+				}
+				//printf("\n");
+			}
+		} else {
+			word[current_counter++] = file_char;
+		}
+	} while(file_char != EOF);
 
 	return result;
 }
@@ -55,33 +122,44 @@ bool check_word(const char* word, hashmap_t hashtable[]) {
 
 	bool valid_word = false;
 
-	int bucket = -1;
 	if (strlen(word) > LENGTH) {
 		fprintf(stderr, "%s is not a word", word);
 	}
 
 	char* temp_word = malloc((strlen(word) + 1)*sizeof(char));
 	memcpy(temp_word, word, strlen(word));
-
 	temp_word[strlen(word)] = '\0';
+	
+	if (isNumber(temp_word)) {
+		return valid_word;
+	}
+	
 	for (int loop=0; loop<strlen(word); loop++) {
 		temp_word[loop] = tolower(word[loop]);
 	}
 
 	int hashvalue = hash_function(temp_word);
-	
+	fprintf(stdout, "(%s) in bucket %d\n", temp_word, hashvalue);
+
 	if (hashtable[hashvalue] != NULL) {
 		hashmap_t bucket_probe = hashtable[hashvalue];
-		while(bucket_probe -> next != NULL) {
-			if (strcmp(bucket_probe->word, temp_word) == 0) {
+		do {
+			if (strncmp(bucket_probe->word, temp_word, strlen(temp_word)) == 0) {
 				valid_word = true;
 				break;
 			} else {
 				bucket_probe = bucket_probe -> next;
 			}
+		} while(bucket_probe -> next != NULL);
+		if (strncmp(bucket_probe->word, temp_word, strlen(temp_word)) == 0) {
+				valid_word = true;
 		}
 		free(bucket_probe);
 		free(temp_word);
+	}
+
+	if (!valid_word) {
+		print_bucket(hashvalue, hashtable);
 	}
 
 	return valid_word;
@@ -115,9 +193,9 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]) {
 				word[loop] = tolower(word[loop]);
 			}
 			int bucket_number = hash_function(word);
-			if (bucket_number == 5) {
-				printf("%s\n", word);
-			}
+			// if (bucket_number == 5) {
+			// 	printf("%s\n", word);
+			// }
 			if (bucket_number > highest_bucket)
 				highest_bucket = bucket_number;
 			// fprintf(stdout, "%s %d\n", buffer, bucket_number);
@@ -145,13 +223,13 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]) {
 			// fprintf(stdout, "%s %d %d\n", word, bucket_number, linked_list_pos);
 			free(word);
 		}
-		fprintf(stdout, "Words counted %d\n", word_count);
-		fprintf(stdout, "Highest bucket number %d\n", highest_bucket);
-		fprintf(stdout, "Debug: read dictionary changed\n");
+		// fprintf(stdout, "Words counted %d\n", word_count);
+		// fprintf(stdout, "Highest bucket number %d\n", highest_bucket);
+		// fprintf(stdout, "Debug: read dictionary changed\n");
 		read_dictionary = false;
 	} while(read_dictionary);
 	
-	//print_bucket(5, hashtable);
+	print_bucket(414, hashtable);
 	//print_hash_table(hashtable);
 
 	fprintf(stdout, "Debug: maximum Buffer size: %d\n", max_buffer_size);
