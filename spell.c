@@ -76,6 +76,8 @@ int check_words(FILE* fp, hashmap_t hashtable[], char * misspelled[]) {
 		return result;
     }
 
+	print_bucket(414, hashtable);
+
 	char file_char;
 	int current_counter = 0;
 	int misspelled_counter = 0;
@@ -229,10 +231,11 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]) {
 		read_dictionary = false;
 	} while(read_dictionary);
 	
-	print_bucket(414, hashtable);
+	// print_bucket(414, hashtable);
 	//print_hash_table(hashtable);
 
 	fprintf(stdout, "Debug: maximum Buffer size: %d\n", max_buffer_size);
+	fclose(dictionary);
 
 	// if ( fclose(dictionary) != 0) {
 	// 	perror("Dictionary closing error");
