@@ -95,9 +95,9 @@ int check_words(FILE* fp, hashmap_t hashtable[], char *misspelled[]) {
 			} else {
 				// fprintf(stdout, "(%s) will be checked\n", word);
 				if (!check_word(word, hashtable)) {
-					misspelled[misspelled_counter] = malloc((strlen(word)+1)*sizeof(char));
-					snprintf(misspelled[misspelled_counter++],strlen(word)+1,"%s",word);
 					fprintf(stdout, "%s is wrong on line %d\n", word, line_counter);
+					misspelled[misspelled_counter] = word;
+					snprintf(misspelled[misspelled_counter++],strlen(word)+1,"%s",word);				
 				}
 				current_counter= 0;
 				word[current_counter] = '\0';
@@ -159,10 +159,10 @@ bool check_word(const char* word, hashmap_t hashtable[]) {
 		bucket_probe = NULL;
 	}
 
-	// if (!valid_word) {
-	// 	fprintf(stdout, "(%s) in bucket %d\n", temp_word, hashvalue);
-	// 	print_bucket(hashvalue, hashtable);
-	// }
+	if (!valid_word) {
+		fprintf(stdout, "(%s) in bucket %d\n", temp_word, hashvalue);
+		print_bucket(hashvalue, hashtable);
+	}
 
 	free(temp_word);
 
@@ -206,13 +206,13 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]) {
 					probe_head = probe_head->next;
 					linked_list_pos++;
 				}
-				hashmap_t new_node = (node *)malloc(sizeof(node));
+				hashmap_t new_node = (hashmap_t)malloc(sizeof(node));
 				new_node->next = NULL;
 				snprintf(new_node->word, sizeof(new_node->word), "%s", word);
 				probe_head->next = new_node;
 			} else {
 				// Insert word into an empty bucket
-				hashtable[bucket_number] = malloc(sizeof(node));
+				hashtable[bucket_number] = (hashmap_t)malloc(sizeof(node));
 				hashtable[bucket_number]->next = NULL;
 				snprintf(hashtable[bucket_number]->word, sizeof(hashtable[bucket_number]->word), "%s", word);
 			}
@@ -223,6 +223,8 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]) {
 	} while(read_dictionary);
 
 	fprintf(stdout, "Debug: maximum Buffer size: %d\n", max_buffer_size);
+
+	print_bucket(441, hashtable);
 
 	if ( fclose(dictionary) != 0) {
 		perror("Dictionary closing error");
