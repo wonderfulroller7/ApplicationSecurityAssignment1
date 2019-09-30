@@ -21,7 +21,11 @@ START_TEST(test_check_word_normal)
     load_dictionary(DICTIONARY, hashtable);
     const char* correct_word = "Justice";
     const char* punctuation_word_2 = "pl.ace";
+    const char* alphanumeric_word = "r123ace";
+    const char* long_word = "pneumonoultramicroscopicsilicovolcanoconiosis";
     ck_assert(check_word(correct_word, hashtable));
+    ck_assert(check_word(alphanumeric_word, hashtable));
+    ck_assert(check_word(long_word, hashtable));
     ck_assert(!check_word(punctuation_word_2, hashtable));
     // Test here: What if a word begins and ends with "?
 }
@@ -38,6 +42,7 @@ START_TEST(test_check_words_normal)
     char *misspelled[MAX_MISSPELLED];
     FILE *fp = fopen("test1.txt", "r");
     int num_misspelled = check_words(fp, hashtable, misspelled);
+    printf("%d",num_misspelled);
     ck_assert(num_misspelled == 3);
     bool test = strlen(misspelled[0]) == strlen(expected[0]);
     int len1 = strlen(misspelled[0]);
@@ -49,11 +54,19 @@ START_TEST(test_check_words_normal)
 }
 END_TEST
 
-START_TEST(test_check_words_normal)
+//Writing test cases for helper functions with non-void return types
+START_TEST(test_check_helper_functions)
 {
-    
-}
-END_TEST
+    hashmap_t hashtable[HASH_SIZE];
+    load_dictionary(DICTIONARY, hashtable);
+    const char* number = "7123512379";
+    const char* punctuated_words = "rapacio.us";
+    ck_assert(isNumber(number));
+    ck_assert(!check_word(punctuated_words, hashtable));
+
+}END_TEST
+
+
 
 Suite *
 check_word_suite(void)

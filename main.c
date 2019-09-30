@@ -23,7 +23,8 @@ int main(int argc, char **argv) {
 	    if ( fp == NULL ) {
 		    perror( "Dictionary file error" );
 	    }
-        check_words(fp, hash_table, misspelled);
+        int misspelled_counter = check_words(fp, hash_table, misspelled);
+        fprintf(stdout, "No of misspelled words: %d\n", misspelled_counter);
     }
     return result;
 }
