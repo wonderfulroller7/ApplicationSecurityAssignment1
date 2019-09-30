@@ -54,7 +54,7 @@ bool isNumber(const char* word)
 bool isASpecialCharacter(char c) {
 
 	int value = (int)c;
-	if ( (value>=65 && value <=90) || (value>=97 && value <=122))
+	if ( (value>=65 && value <=90) || (value>=97 && value <=122) || c == '\'')
 		return false;
 	else
 		return true;
@@ -88,6 +88,9 @@ int check_words(FILE* fp, hashmap_t hashtable[], char *misspelled[]) {
 		if (isASpecialCharacter(file_char)) {
 			// printf("SC");
 			// printf("\nSpecial character found. Current counter: %d \n", line_counter);
+			if (word[strlen(word) - 1] == '\'') {
+				word[strlen(word) - 1] = '\0';
+			}
 			if (file_char == '\n')
 				line_counter++;
 			if (current_counter == 0) {
@@ -159,10 +162,10 @@ bool check_word(const char* word, hashmap_t hashtable[]) {
 		bucket_probe = NULL;
 	}
 
-	if (!valid_word) {
-		fprintf(stdout, "(%s) in bucket %d\n", temp_word, hashvalue);
-		print_bucket(hashvalue, hashtable);
-	}
+	// if (!valid_word) {
+	// 	fprintf(stdout, "(%s) in bucket %d\n", temp_word, hashvalue);
+	// 	print_bucket(hashvalue, hashtable);
+	// }
 
 	free(temp_word);
 
@@ -222,9 +225,9 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]) {
 		read_dictionary = false;
 	} while(read_dictionary);
 
-	fprintf(stdout, "Debug: maximum Buffer size: %d\n", max_buffer_size);
+	// fprintf(stdout, "Debug: maximum Buffer size: %d\n", max_buffer_size);
 
-	print_bucket(441, hashtable);
+	// print_bucket(441, hashtable);
 
 	if ( fclose(dictionary) != 0) {
 		perror("Dictionary closing error");

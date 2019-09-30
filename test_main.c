@@ -49,6 +49,12 @@ START_TEST(test_check_words_normal)
 }
 END_TEST
 
+START_TEST(test_check_words_normal)
+{
+    
+}
+END_TEST
+
 Suite *
 check_word_suite(void)
 {
