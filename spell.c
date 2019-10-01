@@ -54,7 +54,7 @@ bool isNumber(const char* word)
 bool isASpecialCharacter(char c) {
 
 	int value = (int)c;
-	if ( (value>=65 && value <=90) || (value>=97 && value <=122) || c == '\'')
+	if ( (value>=65 && value <=90) || (value>=97 && value <=122) || c == '\'' || c == '.') 
 		return false;
 	else
 		return true;
@@ -91,6 +91,9 @@ int check_words(FILE* fp, hashmap_t hashtable[], char *misspelled[]) {
 			if (word[strlen(word) - 1] == '\'') {
 				word[strlen(word) - 1] = '\0';
 			}
+			if (word[strlen(word) - 1] == '.') {
+				word[strlen(word) - 1] = '\0';
+			}
 			if (file_char == '\n')
 				line_counter++;
 			if (current_counter == 0) {
@@ -98,9 +101,10 @@ int check_words(FILE* fp, hashmap_t hashtable[], char *misspelled[]) {
 			} else {
 				// fprintf(stdout, "(%s) will be checked\n", word);
 				if (!check_word(word, hashtable)) {
-					fprintf(stdout, "%s is wrong on line %d\n", word, line_counter);
+					printf("%s",word);
+					//fprintf(stdout, "%s \n", word, line_counter);
 					misspelled[misspelled_counter] = word;
-					snprintf(misspelled[misspelled_counter++],strlen(word)+1,"%s",word);				
+					snprintf(misspelled[misspelled_counter++],strlen(word)+1,"%s",word);
 				}
 				current_counter= 0;
 				word[current_counter] = '\0';
