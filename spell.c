@@ -138,8 +138,8 @@ int check_words(FILE* fp, hashmap_t hashtable[], char *misspelled[]) {
 					word[current_counter] = '\0';
 				}
 			} else {
-				misspelled[misspelled_counter] = calloc(46, sizeof(char));
-				snprintf(misspelled[misspelled_counter++],46,"%s",word);
+				misspelled[misspelled_counter] = calloc(strlen(word), sizeof(char));
+				snprintf(misspelled[misspelled_counter++],strlen(word),"%s",word);
 				current_counter = 0;
 				word[current_counter] = '\0';
 			}

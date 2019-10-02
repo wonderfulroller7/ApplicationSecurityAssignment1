@@ -29,4 +29,5 @@ int main(int argc, char** argv) {
     for (int i = 0; i < num_wrong; i++) {
         printf("%s\n", misspelled[i]);
     }
+    return EXIT_SUCCESS;
 }
