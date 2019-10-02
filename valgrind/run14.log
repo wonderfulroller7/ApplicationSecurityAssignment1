@@ -1,182 +1,182 @@
-==9947== Memcheck, a memory error detector
-==9947== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==9947== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
-==9947== Command: ./spell_check test7.txt wordlist.txt
-==9947== Parent PID: 8714
-==9947== 
---9947-- 
---9947-- Valgrind options:
---9947--    --tool=memcheck
---9947--    --log-file=valgrind/run14.log
---9947--    --leak-check=full
---9947--    -v
---9947--    --track-origins=yes
---9947-- Contents of /proc/version:
---9947--   Linux version 5.0.0-29-generic (buildd@lgw01-amd64-039) (gcc version 7.4.0 (Ubuntu 7.4.0-1ubuntu1~18.04.1)) #31~18.04.1-Ubuntu SMP Thu Sep 12 18:29:21 UTC 2019
---9947-- 
---9947-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-avx-avx2
---9947-- Page sizes: currently 4096, max supported 4096
---9947-- Valgrind library directory: /usr/lib/valgrind
---9947-- Reading syms from /home/neil/ApplicationSecurity/ApplicationSecurityAssignment1/spell_check
---9947-- Reading syms from /lib/x86_64-linux-gnu/ld-2.27.so
---9947--   Considering /lib/x86_64-linux-gnu/ld-2.27.so ..
---9947--   .. CRC mismatch (computed 1b7c895e wanted 2943108a)
---9947--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.27.so ..
---9947--   .. CRC is valid
---9947-- Reading syms from /usr/lib/valgrind/memcheck-amd64-linux
---9947--   Considering /usr/lib/valgrind/memcheck-amd64-linux ..
---9947--   .. CRC mismatch (computed c25f395c wanted 0a9602a8)
---9947--    object doesn't have a symbol table
---9947--    object doesn't have a dynamic symbol table
---9947-- Scheduler: using generic scheduler lock implementation.
---9947-- Reading suppressions file: /usr/lib/valgrind/default.supp
-==9947== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-9947-by-neil-on-???
-==9947== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-9947-by-neil-on-???
-==9947== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-9947-by-neil-on-???
-==9947== 
-==9947== TO CONTROL THIS PROCESS USING vgdb (which you probably
-==9947== don't want to do, unless you know exactly what you're doing,
-==9947== or are doing some strange experiment):
-==9947==   /usr/lib/valgrind/../../bin/vgdb --pid=9947 ...command...
-==9947== 
-==9947== TO DEBUG THIS PROCESS USING GDB: start GDB like this
-==9947==   /path/to/gdb ./spell_check
-==9947== and then give GDB the following command
-==9947==   target remote | /usr/lib/valgrind/../../bin/vgdb --pid=9947
-==9947== --pid is optional if only one valgrind process is running
-==9947== 
---9947-- REDIR: 0x401f2f0 (ld-linux-x86-64.so.2:strlen) redirected to 0x58060901 (???)
---9947-- REDIR: 0x401f0d0 (ld-linux-x86-64.so.2:index) redirected to 0x5806091b (???)
---9947-- Reading syms from /usr/lib/valgrind/vgpreload_core-amd64-linux.so
---9947--   Considering /usr/lib/valgrind/vgpreload_core-amd64-linux.so ..
---9947--   .. CRC mismatch (computed 4b63d83e wanted 670599e6)
---9947--    object doesn't have a symbol table
---9947-- Reading syms from /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so
---9947--   Considering /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so ..
---9947--   .. CRC mismatch (computed a4b37bee wanted 8ad4dc94)
---9947--    object doesn't have a symbol table
-==9947== WARNING: new redirection conflicts with existing -- ignoring it
---9947--     old: 0x0401f2f0 (strlen              ) R-> (0000.0) 0x58060901 ???
---9947--     new: 0x0401f2f0 (strlen              ) R-> (2007.0) 0x04c32db0 strlen
---9947-- REDIR: 0x401d360 (ld-linux-x86-64.so.2:strcmp) redirected to 0x4c33ee0 (strcmp)
---9947-- REDIR: 0x401f830 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4c374f0 (mempcpy)
---9947-- Reading syms from /lib/x86_64-linux-gnu/libc-2.27.so
---9947--   Considering /lib/x86_64-linux-gnu/libc-2.27.so ..
---9947--   .. CRC mismatch (computed b1c74187 wanted 042cc048)
---9947--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.27.so ..
---9947--   .. CRC is valid
---9947-- REDIR: 0x4edac70 (libc.so.6:memmove) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---9947-- REDIR: 0x4ed9d40 (libc.so.6:strncpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---9947-- REDIR: 0x4edaf50 (libc.so.6:strcasecmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---9947-- REDIR: 0x4ed9790 (libc.so.6:strcat) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---9947-- REDIR: 0x4ed9d70 (libc.so.6:rindex) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---9947-- REDIR: 0x4edc7c0 (libc.so.6:rawmemchr) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---9947-- REDIR: 0x4edade0 (libc.so.6:mempcpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---9947-- REDIR: 0x4edac10 (libc.so.6:bcmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---9947-- REDIR: 0x4ed9d00 (libc.so.6:strncmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---9947-- REDIR: 0x4ed9800 (libc.so.6:strcmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---9947-- REDIR: 0x4edad40 (libc.so.6:memset) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---9947-- REDIR: 0x4ef80f0 (libc.so.6:wcschr) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---9947-- REDIR: 0x4ed9ca0 (libc.so.6:strnlen) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---9947-- REDIR: 0x4ed9870 (libc.so.6:strcspn) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---9947-- REDIR: 0x4edafa0 (libc.so.6:strncasecmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---9947-- REDIR: 0x4ed9840 (libc.so.6:strcpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---9947-- REDIR: 0x4edb0e0 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---9947-- REDIR: 0x4ed9da0 (libc.so.6:strpbrk) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---9947-- REDIR: 0x4ed97c0 (libc.so.6:index) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---9947-- REDIR: 0x4ed9c70 (libc.so.6:strlen) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---9947-- REDIR: 0x4ee46c0 (libc.so.6:memrchr) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---9947-- REDIR: 0x4edaff0 (libc.so.6:strcasecmp_l) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---9947-- REDIR: 0x4edabe0 (libc.so.6:memchr) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---9947-- REDIR: 0x4ef8eb0 (libc.so.6:wcslen) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---9947-- REDIR: 0x4eda050 (libc.so.6:strspn) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---9947-- REDIR: 0x4edaf20 (libc.so.6:stpncpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---9947-- REDIR: 0x4edaef0 (libc.so.6:stpcpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---9947-- REDIR: 0x4edc7f0 (libc.so.6:strchrnul) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---9947-- REDIR: 0x4edb040 (libc.so.6:strncasecmp_l) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---9947-- REDIR: 0x4fca3c0 (libc.so.6:__strrchr_avx2) redirected to 0x4c32730 (rindex)
---9947-- REDIR: 0x4ed3070 (libc.so.6:malloc) redirected to 0x4c2faa0 (malloc)
---9947-- REDIR: 0x4eda590 (libc.so.6:__GI_strstr) redirected to 0x4c37760 (__strstr_sse2)
---9947-- REDIR: 0x4fc6420 (libc.so.6:__memchr_avx2) redirected to 0x4c33f80 (memchr)
---9947-- REDIR: 0x4fcaad0 (libc.so.6:__memcpy_avx_unaligned_erms) redirected to 0x4c366e0 (memmove)
---9947-- REDIR: 0x4fca590 (libc.so.6:__strlen_avx2) redirected to 0x4c32cf0 (strlen)
---9947-- REDIR: 0x4fca1d0 (libc.so.6:__strchrnul_avx2) redirected to 0x4c37020 (strchrnul)
---9947-- REDIR: 0x4fcaab0 (libc.so.6:__mempcpy_avx_unaligned_erms) redirected to 0x4c37130 (mempcpy)
---9947-- REDIR: 0x4ed3950 (libc.so.6:free) redirected to 0x4c30cd0 (free)
---9947-- REDIR: 0x4fc1510 (libc.so.6:__strncmp_sse42) redirected to 0x4c33570 (__strncmp_sse42)
-==9947== Conditional jump or move depends on uninitialised value(s)
-==9947==    at 0x4C32D08: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==9947==    by 0x4E994D2: vfprintf (vfprintf.c:1643)
-==9947==    by 0x4EC490F: vsnprintf (vsnprintf.c:114)
-==9947==    by 0x4EA0FDE: snprintf (snprintf.c:33)
-==9947==    by 0x10921F: check_words (in /home/neil/ApplicationSecurity/ApplicationSecurityAssignment1/spell_check)
-==9947==    by 0x1098F3: main (in /home/neil/ApplicationSecurity/ApplicationSecurityAssignment1/spell_check)
-==9947==  Uninitialised value was created by a stack allocation
-==9947==    at 0x10903F: check_words (in /home/neil/ApplicationSecurity/ApplicationSecurityAssignment1/spell_check)
-==9947== 
-==9947== Conditional jump or move depends on uninitialised value(s)
-==9947==    at 0x4ECA497: _IO_default_xsputn (genops.c:417)
-==9947==    by 0x4E98FEA: vfprintf (vfprintf.c:1643)
-==9947==    by 0x4EC490F: vsnprintf (vsnprintf.c:114)
-==9947==    by 0x4EA0FDE: snprintf (snprintf.c:33)
-==9947==    by 0x10921F: check_words (in /home/neil/ApplicationSecurity/ApplicationSecurityAssignment1/spell_check)
-==9947==    by 0x1098F3: main (in /home/neil/ApplicationSecurity/ApplicationSecurityAssignment1/spell_check)
-==9947==  Uninitialised value was created by a stack allocation
-==9947==    at 0x10903F: check_words (in /home/neil/ApplicationSecurity/ApplicationSecurityAssignment1/spell_check)
-==9947== 
-==9947== 
-==9947== HEAP SUMMARY:
-==9947==     in use at exit: 6,895,388 bytes in 123,133 blocks
-==9947==   total heap usage: 123,145 allocs, 12 frees, 6,905,742 bytes allocated
-==9947== 
-==9947== Searching for pointers to 123,133 not-freed blocks
-==9947== Checked 82,312 bytes
-==9947== 
-==9947== 6 bytes in 1 blocks are definitely lost in loss record 1 of 4
-==9947==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==9947==    by 0x109166: check_words (in /home/neil/ApplicationSecurity/ApplicationSecurityAssignment1/spell_check)
-==9947==    by 0x1098F3: main (in /home/neil/ApplicationSecurity/ApplicationSecurityAssignment1/spell_check)
-==9947== 
-==9947== 46 bytes in 1 blocks are definitely lost in loss record 2 of 4
-==9947==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==9947==    by 0x1091DF: check_words (in /home/neil/ApplicationSecurity/ApplicationSecurityAssignment1/spell_check)
-==9947==    by 0x1098F3: main (in /home/neil/ApplicationSecurity/ApplicationSecurityAssignment1/spell_check)
-==9947== 
-==9947== 6,895,336 (99,848 direct, 6,795,488 indirect) bytes in 1,783 blocks are definitely lost in loss record 4 of 4
-==9947==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==9947==    by 0x109718: load_dictionary (in /home/neil/ApplicationSecurity/ApplicationSecurityAssignment1/spell_check)
-==9947==    by 0x1098D3: main (in /home/neil/ApplicationSecurity/ApplicationSecurityAssignment1/spell_check)
-==9947== 
-==9947== LEAK SUMMARY:
-==9947==    definitely lost: 99,900 bytes in 1,785 blocks
-==9947==    indirectly lost: 6,795,488 bytes in 121,348 blocks
-==9947==      possibly lost: 0 bytes in 0 blocks
-==9947==    still reachable: 0 bytes in 0 blocks
-==9947==         suppressed: 0 bytes in 0 blocks
-==9947== 
-==9947== ERROR SUMMARY: 8 errors from 5 contexts (suppressed: 0 from 0)
-==9947== 
-==9947== 2 errors in context 1 of 5:
-==9947== Conditional jump or move depends on uninitialised value(s)
-==9947==    at 0x4ECA497: _IO_default_xsputn (genops.c:417)
-==9947==    by 0x4E98FEA: vfprintf (vfprintf.c:1643)
-==9947==    by 0x4EC490F: vsnprintf (vsnprintf.c:114)
-==9947==    by 0x4EA0FDE: snprintf (snprintf.c:33)
-==9947==    by 0x10921F: check_words (in /home/neil/ApplicationSecurity/ApplicationSecurityAssignment1/spell_check)
-==9947==    by 0x1098F3: main (in /home/neil/ApplicationSecurity/ApplicationSecurityAssignment1/spell_check)
-==9947==  Uninitialised value was created by a stack allocation
-==9947==    at 0x10903F: check_words (in /home/neil/ApplicationSecurity/ApplicationSecurityAssignment1/spell_check)
-==9947== 
-==9947== 
-==9947== 3 errors in context 2 of 5:
-==9947== Conditional jump or move depends on uninitialised value(s)
-==9947==    at 0x4C32D08: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==9947==    by 0x4E994D2: vfprintf (vfprintf.c:1643)
-==9947==    by 0x4EC490F: vsnprintf (vsnprintf.c:114)
-==9947==    by 0x4EA0FDE: snprintf (snprintf.c:33)
-==9947==    by 0x10921F: check_words (in /home/neil/ApplicationSecurity/ApplicationSecurityAssignment1/spell_check)
-==9947==    by 0x1098F3: main (in /home/neil/ApplicationSecurity/ApplicationSecurityAssignment1/spell_check)
-==9947==  Uninitialised value was created by a stack allocation
-==9947==    at 0x10903F: check_words (in /home/neil/ApplicationSecurity/ApplicationSecurityAssignment1/spell_check)
-==9947== 
-==9947== ERROR SUMMARY: 8 errors from 5 contexts (suppressed: 0 from 0)
+==10337== Memcheck, a memory error detector
+==10337== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==10337== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==10337== Command: ./spell_check test7.txt wordlist.txt
+==10337== Parent PID: 8714
+==10337== 
+--10337-- 
+--10337-- Valgrind options:
+--10337--    --tool=memcheck
+--10337--    --log-file=valgrind/run14.log
+--10337--    --leak-check=full
+--10337--    -v
+--10337--    --track-origins=yes
+--10337-- Contents of /proc/version:
+--10337--   Linux version 5.0.0-29-generic (buildd@lgw01-amd64-039) (gcc version 7.4.0 (Ubuntu 7.4.0-1ubuntu1~18.04.1)) #31~18.04.1-Ubuntu SMP Thu Sep 12 18:29:21 UTC 2019
+--10337-- 
+--10337-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-avx-avx2
+--10337-- Page sizes: currently 4096, max supported 4096
+--10337-- Valgrind library directory: /usr/lib/valgrind
+--10337-- Reading syms from /home/neil/ApplicationSecurity/ApplicationSecurityAssignment1/spell_check
+--10337-- Reading syms from /lib/x86_64-linux-gnu/ld-2.27.so
+--10337--   Considering /lib/x86_64-linux-gnu/ld-2.27.so ..
+--10337--   .. CRC mismatch (computed 1b7c895e wanted 2943108a)
+--10337--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.27.so ..
+--10337--   .. CRC is valid
+--10337-- Reading syms from /usr/lib/valgrind/memcheck-amd64-linux
+--10337--   Considering /usr/lib/valgrind/memcheck-amd64-linux ..
+--10337--   .. CRC mismatch (computed c25f395c wanted 0a9602a8)
+--10337--    object doesn't have a symbol table
+--10337--    object doesn't have a dynamic symbol table
+--10337-- Scheduler: using generic scheduler lock implementation.
+--10337-- Reading suppressions file: /usr/lib/valgrind/default.supp
+==10337== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-10337-by-neil-on-???
+==10337== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-10337-by-neil-on-???
+==10337== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-10337-by-neil-on-???
+==10337== 
+==10337== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==10337== don't want to do, unless you know exactly what you're doing,
+==10337== or are doing some strange experiment):
+==10337==   /usr/lib/valgrind/../../bin/vgdb --pid=10337 ...command...
+==10337== 
+==10337== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==10337==   /path/to/gdb ./spell_check
+==10337== and then give GDB the following command
+==10337==   target remote | /usr/lib/valgrind/../../bin/vgdb --pid=10337
+==10337== --pid is optional if only one valgrind process is running
+==10337== 
+--10337-- REDIR: 0x401f2f0 (ld-linux-x86-64.so.2:strlen) redirected to 0x58060901 (???)
+--10337-- REDIR: 0x401f0d0 (ld-linux-x86-64.so.2:index) redirected to 0x5806091b (???)
+--10337-- Reading syms from /usr/lib/valgrind/vgpreload_core-amd64-linux.so
+--10337--   Considering /usr/lib/valgrind/vgpreload_core-amd64-linux.so ..
+--10337--   .. CRC mismatch (computed 4b63d83e wanted 670599e6)
+--10337--    object doesn't have a symbol table
+--10337-- Reading syms from /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so
+--10337--   Considering /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so ..
+--10337--   .. CRC mismatch (computed a4b37bee wanted 8ad4dc94)
+--10337--    object doesn't have a symbol table
+==10337== WARNING: new redirection conflicts with existing -- ignoring it
+--10337--     old: 0x0401f2f0 (strlen              ) R-> (0000.0) 0x58060901 ???
+--10337--     new: 0x0401f2f0 (strlen              ) R-> (2007.0) 0x04c32db0 strlen
+--10337-- REDIR: 0x401d360 (ld-linux-x86-64.so.2:strcmp) redirected to 0x4c33ee0 (strcmp)
+--10337-- REDIR: 0x401f830 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4c374f0 (mempcpy)
+--10337-- Reading syms from /lib/x86_64-linux-gnu/libc-2.27.so
+--10337--   Considering /lib/x86_64-linux-gnu/libc-2.27.so ..
+--10337--   .. CRC mismatch (computed b1c74187 wanted 042cc048)
+--10337--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.27.so ..
+--10337--   .. CRC is valid
+--10337-- REDIR: 0x4edac70 (libc.so.6:memmove) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--10337-- REDIR: 0x4ed9d40 (libc.so.6:strncpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--10337-- REDIR: 0x4edaf50 (libc.so.6:strcasecmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--10337-- REDIR: 0x4ed9790 (libc.so.6:strcat) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--10337-- REDIR: 0x4ed9d70 (libc.so.6:rindex) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--10337-- REDIR: 0x4edc7c0 (libc.so.6:rawmemchr) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--10337-- REDIR: 0x4edade0 (libc.so.6:mempcpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--10337-- REDIR: 0x4edac10 (libc.so.6:bcmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--10337-- REDIR: 0x4ed9d00 (libc.so.6:strncmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--10337-- REDIR: 0x4ed9800 (libc.so.6:strcmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--10337-- REDIR: 0x4edad40 (libc.so.6:memset) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--10337-- REDIR: 0x4ef80f0 (libc.so.6:wcschr) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--10337-- REDIR: 0x4ed9ca0 (libc.so.6:strnlen) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--10337-- REDIR: 0x4ed9870 (libc.so.6:strcspn) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--10337-- REDIR: 0x4edafa0 (libc.so.6:strncasecmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--10337-- REDIR: 0x4ed9840 (libc.so.6:strcpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--10337-- REDIR: 0x4edb0e0 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--10337-- REDIR: 0x4ed9da0 (libc.so.6:strpbrk) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--10337-- REDIR: 0x4ed97c0 (libc.so.6:index) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--10337-- REDIR: 0x4ed9c70 (libc.so.6:strlen) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--10337-- REDIR: 0x4ee46c0 (libc.so.6:memrchr) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--10337-- REDIR: 0x4edaff0 (libc.so.6:strcasecmp_l) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--10337-- REDIR: 0x4edabe0 (libc.so.6:memchr) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--10337-- REDIR: 0x4ef8eb0 (libc.so.6:wcslen) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--10337-- REDIR: 0x4eda050 (libc.so.6:strspn) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--10337-- REDIR: 0x4edaf20 (libc.so.6:stpncpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--10337-- REDIR: 0x4edaef0 (libc.so.6:stpcpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--10337-- REDIR: 0x4edc7f0 (libc.so.6:strchrnul) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--10337-- REDIR: 0x4edb040 (libc.so.6:strncasecmp_l) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--10337-- REDIR: 0x4fca3c0 (libc.so.6:__strrchr_avx2) redirected to 0x4c32730 (rindex)
+--10337-- REDIR: 0x4ed3070 (libc.so.6:malloc) redirected to 0x4c2faa0 (malloc)
+--10337-- REDIR: 0x4eda590 (libc.so.6:__GI_strstr) redirected to 0x4c37760 (__strstr_sse2)
+--10337-- REDIR: 0x4fc6420 (libc.so.6:__memchr_avx2) redirected to 0x4c33f80 (memchr)
+--10337-- REDIR: 0x4fcaad0 (libc.so.6:__memcpy_avx_unaligned_erms) redirected to 0x4c366e0 (memmove)
+--10337-- REDIR: 0x4fca590 (libc.so.6:__strlen_avx2) redirected to 0x4c32cf0 (strlen)
+--10337-- REDIR: 0x4fca1d0 (libc.so.6:__strchrnul_avx2) redirected to 0x4c37020 (strchrnul)
+--10337-- REDIR: 0x4fcaab0 (libc.so.6:__mempcpy_avx_unaligned_erms) redirected to 0x4c37130 (mempcpy)
+--10337-- REDIR: 0x4ed3950 (libc.so.6:free) redirected to 0x4c30cd0 (free)
+--10337-- REDIR: 0x4fc1510 (libc.so.6:__strncmp_sse42) redirected to 0x4c33570 (__strncmp_sse42)
+==10337== Conditional jump or move depends on uninitialised value(s)
+==10337==    at 0x4C32D08: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10337==    by 0x4E994D2: vfprintf (vfprintf.c:1643)
+==10337==    by 0x4EC490F: vsnprintf (vsnprintf.c:114)
+==10337==    by 0x4EA0FDE: snprintf (snprintf.c:33)
+==10337==    by 0x10921F: check_words (spell.c:142)
+==10337==    by 0x1098F3: main (in /home/neil/ApplicationSecurity/ApplicationSecurityAssignment1/spell_check)
+==10337==  Uninitialised value was created by a stack allocation
+==10337==    at 0x10903F: check_words (spell.c:101)
+==10337== 
+==10337== Conditional jump or move depends on uninitialised value(s)
+==10337==    at 0x4ECA497: _IO_default_xsputn (genops.c:417)
+==10337==    by 0x4E98FEA: vfprintf (vfprintf.c:1643)
+==10337==    by 0x4EC490F: vsnprintf (vsnprintf.c:114)
+==10337==    by 0x4EA0FDE: snprintf (snprintf.c:33)
+==10337==    by 0x10921F: check_words (spell.c:142)
+==10337==    by 0x1098F3: main (in /home/neil/ApplicationSecurity/ApplicationSecurityAssignment1/spell_check)
+==10337==  Uninitialised value was created by a stack allocation
+==10337==    at 0x10903F: check_words (spell.c:101)
+==10337== 
+==10337== 
+==10337== HEAP SUMMARY:
+==10337==     in use at exit: 6,895,388 bytes in 123,133 blocks
+==10337==   total heap usage: 123,145 allocs, 12 frees, 6,905,742 bytes allocated
+==10337== 
+==10337== Searching for pointers to 123,133 not-freed blocks
+==10337== Checked 82,312 bytes
+==10337== 
+==10337== 6 bytes in 1 blocks are definitely lost in loss record 1 of 4
+==10337==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10337==    by 0x109166: check_words (spell.c:135)
+==10337==    by 0x1098F3: main (in /home/neil/ApplicationSecurity/ApplicationSecurityAssignment1/spell_check)
+==10337== 
+==10337== 46 bytes in 1 blocks are definitely lost in loss record 2 of 4
+==10337==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10337==    by 0x1091DF: check_words (spell.c:141)
+==10337==    by 0x1098F3: main (in /home/neil/ApplicationSecurity/ApplicationSecurityAssignment1/spell_check)
+==10337== 
+==10337== 6,895,336 (99,848 direct, 6,795,488 indirect) bytes in 1,783 blocks are definitely lost in loss record 4 of 4
+==10337==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10337==    by 0x109718: load_dictionary (spell.c:260)
+==10337==    by 0x1098D3: main (in /home/neil/ApplicationSecurity/ApplicationSecurityAssignment1/spell_check)
+==10337== 
+==10337== LEAK SUMMARY:
+==10337==    definitely lost: 99,900 bytes in 1,785 blocks
+==10337==    indirectly lost: 6,795,488 bytes in 121,348 blocks
+==10337==      possibly lost: 0 bytes in 0 blocks
+==10337==    still reachable: 0 bytes in 0 blocks
+==10337==         suppressed: 0 bytes in 0 blocks
+==10337== 
+==10337== ERROR SUMMARY: 8 errors from 5 contexts (suppressed: 0 from 0)
+==10337== 
+==10337== 2 errors in context 1 of 5:
+==10337== Conditional jump or move depends on uninitialised value(s)
+==10337==    at 0x4ECA497: _IO_default_xsputn (genops.c:417)
+==10337==    by 0x4E98FEA: vfprintf (vfprintf.c:1643)
+==10337==    by 0x4EC490F: vsnprintf (vsnprintf.c:114)
+==10337==    by 0x4EA0FDE: snprintf (snprintf.c:33)
+==10337==    by 0x10921F: check_words (spell.c:142)
+==10337==    by 0x1098F3: main (in /home/neil/ApplicationSecurity/ApplicationSecurityAssignment1/spell_check)
+==10337==  Uninitialised value was created by a stack allocation
+==10337==    at 0x10903F: check_words (spell.c:101)
+==10337== 
+==10337== 
+==10337== 3 errors in context 2 of 5:
+==10337== Conditional jump or move depends on uninitialised value(s)
+==10337==    at 0x4C32D08: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10337==    by 0x4E994D2: vfprintf (vfprintf.c:1643)
+==10337==    by 0x4EC490F: vsnprintf (vsnprintf.c:114)
+==10337==    by 0x4EA0FDE: snprintf (snprintf.c:33)
+==10337==    by 0x10921F: check_words (spell.c:142)
+==10337==    by 0x1098F3: main (in /home/neil/ApplicationSecurity/ApplicationSecurityAssignment1/spell_check)
+==10337==  Uninitialised value was created by a stack allocation
+==10337==    at 0x10903F: check_words (spell.c:101)
+==10337== 
+==10337== ERROR SUMMARY: 8 errors from 5 contexts (suppressed: 0 from 0)
