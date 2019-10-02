@@ -54,7 +54,10 @@ bool isNumber(const char* word)
 bool isASpecialCharacter(char c) {
 
 	int value = (int)c;
-	if ( (value>=65 && value <=90) || (value>=97 && value <=122) || c == '\'' || c == '.') 
+	if ( (value>=65 && value <=90) 
+		|| (value>=97 && value <=122) 
+		|| c == '\'' 
+		|| c == '.') 
 		return false;
 	else
 		return true;
@@ -85,7 +88,7 @@ int check_words(FILE* fp, hashmap_t hashtable[], char *misspelled[]) {
 	do {
 		file_char = (char)fgetc(fp);
 		// printf("%c", file_char);
-		if (isASpecialCharacter(file_char)) {
+		if (isASpecialCharacter(file_char) && current_counter < 45) {
 			// printf("SC");
 			// printf("\nSpecial character found. Current counter: %d \n", line_counter);
 			if (word[strlen(word) - 1] == '\'') {
@@ -109,9 +112,19 @@ int check_words(FILE* fp, hashmap_t hashtable[], char *misspelled[]) {
 				current_counter= 0;
 				word[current_counter] = '\0';
 			}
-		} else {
+		} else if (isASpecialCharacter(file_char) && current_counter > 45) {
+			misspelled[misspelled_counter] = word;
+			snprintf(misspelled[misspelled_counter++],strlen(word)+1,"%s",word);
+			current_counter=0;
+			word[current_counter] = '\0';
+		} else if (current_counter < 45) {
 			word[current_counter++] = file_char;
 			word[current_counter] = '\0';
+		} else {
+			current_counter++;
+			if (current_counter == 45) {
+				word[current_counter] = '\0';
+			}
 		}
 	} while(file_char != EOF);
 
