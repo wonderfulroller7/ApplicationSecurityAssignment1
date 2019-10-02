@@ -1,30 +1,32 @@
-#include<stdlib.h>
-#include<stdio.h>
+
+#include <ctype.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 #include "dictionary.h"
-
-int main(int argc, char **argv) {
-
-    node* hash_table[HASH_SIZE];
-    int result = EXIT_FAILURE;
-    if (argc!=3)
-	{
-		fprintf(stdout,"Incorrect Usage!\n");
-		fprintf(stdout,"./spell_check <dictionary_file> <file_to_be_checked>\n");
-	} 
-    else {
-        // fprintf(stdout, "%s %s\n", argv[1], argv[2]);
-        if (load_dictionary(argv[2], hash_table)) {
-            //printf("Dictionary loaded");
-            result = EXIT_SUCCESS;
-        }
-
-        char *misspelled[45];
-        FILE *fp = fopen(argv[1], "r");
-	    if ( fp == NULL ) {
-		    perror( "Dictionary file error" );
-	    }
-        int misspelled_counter = check_words(fp, hash_table, misspelled);
-        fprintf(stdout, "No of misspelled words: %d\n", misspelled_counter);
+#undef calculate
+#undef getrusage
+// #define expected_size 118819
+// default dictionary
+#define DICTIONARY "wordlist.txt"
+#define BODICTIONARY "bo_wordlist.txt"
+#define MAX_MISSPELLED 1000
+int main(int argc, char** argv) {
+    hashmap_t hashtable[HASH_SIZE];
+    if (argc < 3) {
+        fprintf(stderr, "Error: Insufficient arguments!\n");
+        fprintf(stderr, "Usage: ./program to_check.txt wordlist.txt\n");
+        exit(-1);
     }
-    return result;
+    char read_mode[2] = "r";
+    FILE* fp = fopen(argv[1], read_mode);
+    char * dictionary = argv[2]; 
+    load_dictionary(dictionary, hashtable);
+    char* misspelled[MAX_MISSPELLED];
+    int num_wrong = check_words(fp, hashtable, misspelled);
+    printf("Printing misspelled words\n");
+    for (int i = 0; i < num_wrong; i++) {
+        printf("%s\n", misspelled[i]);
+    }
 }

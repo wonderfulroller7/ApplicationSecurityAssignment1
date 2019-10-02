@@ -1,0 +1,40 @@
+// printf("%c", file_char);
+		if (isASpecialCharacter(file_char) && current_counter < 45) {
+			// printf("SC");
+			// printf("\nSpecial character found. Current counter: %d \n", line_counter);
+			if (word[strlen(word) - 1] == '\'') {
+				word[strlen(word) - 1] = '\0';
+			}
+			if (word[strlen(word) - 1] == '.') {
+				word[strlen(word) - 1] = '\0';
+			}
+			if (file_char == '\n')
+				line_counter++;
+			if (current_counter == 0) {
+				continue;
+			} else {
+				// fprintf(stdout, "(%s) will be checked\n", word);
+				if (!check_word(word, hashtable)) {
+					printf("%s", word);
+					//fprintf(stdout, "%s \n", word, line_counter);
+					misspelled[misspelled_counter] = word;
+					snprintf(misspelled[misspelled_counter++],strlen(word)+1,"%s",word);
+				}
+				current_counter= 0;
+				word[current_counter] = '\0';
+			}
+		} else if (isASpecialCharacter(file_char) && current_counter > 45) {
+			printf("%s",word);
+			misspelled[misspelled_counter] = word;
+			snprintf(misspelled[misspelled_counter++],strlen(word)+1,"%s",word);
+			current_counter=0;
+			word[current_counter] = '\0';
+		} else if (current_counter < 45) {
+			word[current_counter++] = file_char;
+			word[current_counter] = '\0';
+		} else {
+			current_counter++;
+			if (current_counter == 45) {
+				word[current_counter] = file_char;
+			}
+		}

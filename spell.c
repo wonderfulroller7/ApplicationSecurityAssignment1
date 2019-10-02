@@ -51,13 +51,40 @@ bool isNumber(const char* word)
 	return result;
 }
 
-bool isASpecialCharacter(char c) {
+bool isAPunctuation(char c) {
+
+	bool result = false;
+	if (c == '\'' || c =='.' || c==':' || c=='!' || c=='\"')
+		result = true;
+	return result;
+}
+
+bool isAnAlphabet(char c) {
 
 	int value = (int)c;
-	if ( (value>=65 && value <=90) 
-		|| (value>=97 && value <=122) 
-		|| c == '\'' 
-		|| c == '.') 
+	// printf("%d -> %c, ", value, c);
+	if ((value>=65 && value <=90))
+		return true;
+	else
+		return false; 
+}
+
+
+// Implement control character
+bool isAsciiControlCharacter(char c) {
+
+	int value = (int)c;
+	if (value>=1 && value<=32) {
+		return true;
+	} else 
+		return false;
+}
+
+
+bool isASpecialCharacter(char c) {
+
+	if ( isAnAlphabet(c) 
+		|| isAPunctuation(c)) 
 		return false;
 	else
 		return true;
@@ -87,45 +114,43 @@ int check_words(FILE* fp, hashmap_t hashtable[], char *misspelled[]) {
 	// read_file(fp);
 	do {
 		file_char = (char)fgetc(fp);
-		// printf("%c", file_char);
-		if (isASpecialCharacter(file_char) && current_counter < 45) {
-			// printf("SC");
-			// printf("\nSpecial character found. Current counter: %d \n", line_counter);
-			if (word[strlen(word) - 1] == '\'') {
-				word[strlen(word) - 1] = '\0';
-			}
-			if (word[strlen(word) - 1] == '.') {
-				word[strlen(word) - 1] = '\0';
-			}
-			if (file_char == '\n')
+		if (isAsciiControlCharacter(file_char)) {
+			if (file_char == '\n') {
 				line_counter++;
-			if (current_counter == 0) {
-				continue;
-			} else {
-				// fprintf(stdout, "(%s) will be checked\n", word);
-				if (!check_word(word, hashtable)) {
-					printf("%s",word);
-					//fprintf(stdout, "%s \n", word, line_counter);
-					misspelled[misspelled_counter] = word;
-					snprintf(misspelled[misspelled_counter++],strlen(word)+1,"%s",word);
+			}
+			if (current_counter <= 45) { // encountered a word that is less than or just of length 45
+				// printf("%s ", word);
+				word[current_counter] = '\0';
+				if (word[current_counter - 1] == '\'' || word[strlen(word) - 1] == '.') { // check if the last character is a punctuation
+					word[current_counter - 1] = '\0';
 				}
-				current_counter= 0;
+				if (current_counter == 0) {
+					continue;
+				}
+				// printf("%s\n", word);
+				if (check_word(word, hashtable)) {
+					current_counter = 0;
+					word[current_counter] = '\0';
+				} else {
+					misspelled[misspelled_counter] = malloc(current_counter+1);
+					snprintf(misspelled[misspelled_counter++],current_counter+1,"%s",word);
+					current_counter = 0;
+					word[current_counter] = '\0';
+				}
+			} else {
+				misspelled[misspelled_counter] = malloc(46);
+				snprintf(misspelled[misspelled_counter++],46,"%s",word);
+				current_counter = 0;
 				word[current_counter] = '\0';
 			}
-		} else if (isASpecialCharacter(file_char) && current_counter > 45) {
-			misspelled[misspelled_counter] = word;
-			snprintf(misspelled[misspelled_counter++],strlen(word)+1,"%s",word);
-			current_counter=0;
-			word[current_counter] = '\0';
-		} else if (current_counter < 45) {
-			word[current_counter++] = file_char;
-			word[current_counter] = '\0';
 		} else {
-			current_counter++;
-			if (current_counter == 45) {
-				word[current_counter] = '\0';
+			// printf("Current Counter = %d Word = %s\n", current_counter, word);
+			if (current_counter < 46) {
+				word[current_counter] = file_char;
 			}
+			current_counter++;
 		}
+		// printf("Misspelled count = %d %c %d\n", misspelled_counter, file_char, (int)file_char);
 	} while(file_char != EOF);
 
 	// destroy_misspelled(misspelled, misspelled_counter);
@@ -143,20 +168,21 @@ int check_words(FILE* fp, hashmap_t hashtable[], char *misspelled[]) {
 bool check_word(const char* word, hashmap_t hashtable[]) {
 
 	bool valid_word = false;
+	int word_length = strlen(word);
 
-	if (strlen(word) > LENGTH) {
+	if (word_length > LENGTH) {
 		fprintf(stderr, "%s is not a word", word);
 	}
 
-	char* temp_word = malloc((strlen(word) + 1)*sizeof(char));
-	memcpy(temp_word, word, strlen(word));
-	temp_word[strlen(word)] = '\0';
+	char* temp_word = malloc((word_length + 1)*sizeof(char));
+	memcpy(temp_word, word, word_length);
+	temp_word[word_length] = '\0';
 	
 	if (isNumber(temp_word)) {
 		return valid_word;
 	}
 	
-	for (int loop=0; loop<strlen(word); loop++) {
+	for (int loop=0; loop<word_length; loop++) {
 		temp_word[loop] = tolower(word[loop]);
 	}
 
