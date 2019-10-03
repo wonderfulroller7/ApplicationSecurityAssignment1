@@ -54,6 +54,35 @@ START_TEST(test_check_words_normal)
 }
 END_TEST
 
+START_TEST(test_check_long_inputs)
+{
+    hashmap_t hashtable[HASH_SIZE];
+    load_dictionary(DICTIONARY, hashtable);
+    const char* longrandomword = "asdasdasdasdqweqweqweqweqweqwasdasd";
+    const char* reallylonglongrandomword = "asdasdasdasdqweqweqweqweqweqwasdasdasdasdoiqwehasdnajskdiqwheuiwqueiqweqweasdasdasd";
+    ck_assert(check_word(longrandomword, hashtable));
+    ck_assert(!check_word(reallylonglongrandomword, hashtable));
+
+}END_TEST
+
+START_TEST(test_check_special_character_extended_ascii_usage)
+{
+    hashmap_t hashtable[HASH_SIZE];
+    load_dictionary(DICTIONARY, hashtable);
+    const char* special_character_word = "ÅsdÅsdÅîdÅsdúîeqweqúeqúeqwúqÅwsdÅsd";
+    ck_assert(check_word(special_character_word, hashtable));
+
+}END_TEST
+
+START_TEST(test_check_punctuations)
+{
+    hashmap_t hashtable[HASH_SIZE];
+    load_dictionary(DICTIONARY, hashtable);
+    const char* special_character_word = "Janet is cook;ing in the kit.che.n";
+    ck_assert(check_word(special_character_word, hashtable));
+
+}END_TEST
+
 //Writing test cases for helper functions with non-void return types
 START_TEST(test_check_helper_functions)
 {

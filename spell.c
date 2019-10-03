@@ -132,13 +132,15 @@ int check_words(FILE* fp, hashmap_t hashtable[], char *misspelled[]) {
 					current_counter = 0;
 					word[current_counter] = '\0';
 				} else {
-					misspelled[misspelled_counter] = calloc(current_counter+1, sizeof(char));
-					snprintf(misspelled[misspelled_counter++],current_counter+1,"%s",word);
+					misspelled[misspelled_counter] = (char *)malloc(current_counter*sizeof(char));
+					memset(misspelled[misspelled_counter], '0', current_counter);
+					snprintf(misspelled[misspelled_counter++],current_counter,"%s",word);
 					current_counter = 0;
 					word[current_counter] = '\0';
 				}
 			} else {
-				misspelled[misspelled_counter] = calloc(strlen(word), sizeof(char));
+				misspelled[misspelled_counter] = (char *)malloc(strlen(word)*sizeof(char));
+				memset(misspelled[misspelled_counter], '0', strlen(word));
 				snprintf(misspelled[misspelled_counter++],strlen(word),"%s",word);
 				current_counter = 0;
 				word[current_counter] = '\0';
