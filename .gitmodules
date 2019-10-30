@@ -1,0 +1,3 @@
+[submodule "appsecurityflaskapp"]
+	path = appsecurityflaskapp
+	url = https://github.com/wonderfulroller7/appsecurityflaskapp.git
