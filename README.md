@@ -1,7 +1,9 @@
-# ApplicationSecurityAssignment1
+# Application Security 
 To build a spell checker
 -------------------------
 
+Assignment 1 (Creating a spell checker in C)
+--------------
 [![Build Status](https://travis-ci.com/wonderfulroller7/ApplicationSecurityAssignment1.svg?token=hJq5j26qqMLZspbxj2hm&branch=master)](https://travis-ci.com/wonderfulroller7/ApplicationSecurityAssignment1)
 
 - Part 1:
@@ -21,3 +23,6 @@ To build a spell checker
 	- Create testcases
 	- Fix memory leaks stated by Valgrind
 	- Run the AFL fuzzer
+
+Assignment 2 (Implementing spell checker in Flask)
+--------------
